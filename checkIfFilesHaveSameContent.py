@@ -63,6 +63,6 @@ else:
             failed.append(filename)
 
     if len(failed) is 0:
-        print "All tests passed"
+        print "All checks passed"
     else:
-        print "Failed tests for: " + str(failed)
+        print "Failed checks for: " + str(failed)
