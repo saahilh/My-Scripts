@@ -1,4 +1,18 @@
+import sys
+from mylib import removeNewlines
+
+'''
+    This script checks if two files of the same name but in different directories
+    have the same text. It takes as input any file structured such that its first line 
+    is the path to the first directory, the second line the path to the second directory,
+    and the remaining lines filenames to be tested.
+'''
+
 def checkIfIdenticalFileContent(path1, path2, filename):
+    path1 = removeNewlines(path1)
+    path2 = removeNewlines(path2)
+    filename = removeNewlines(filename)
+
     file1 = open(path1 + filename, 'r')
     file2 = open(path2 + filename, 'r')
     
@@ -11,11 +25,15 @@ def checkIfIdenticalFileContent(path1, path2, filename):
     file2.close()
     return filesAreIdentical
 
-files = ['AndForkTestMergedBranches.jucm', 'andfork.jucm', 'andjoin.jucm', 'belief.jucm', 'connect.jucm', 'failurepoint.jucm', 'orjoin.jucm', 'resource.jucm', 'timer.jucm', 'waitingplace.jucm']
+comparisonInput = sys.stdin.readlines()
+path1 = comparisonInput[0]
+path2 = comparisonInput[1]
+filenames = comparisonInput[2:]
+
 failed = []
 
-for filename in files:
-    filesAreIdentical = checkIfIdenticalFileContent('../eclipse-workspace/TURNtoURN/ATLProject/Output/', '../oracleOutputs/', filename)
+for filename in filenames:
+    filesAreIdentical = checkIfIdenticalFileContent(path1, path2, filename)
     if not filesAreIdentical:
         failed.append(filename)
 
