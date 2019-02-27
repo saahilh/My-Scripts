@@ -19,11 +19,15 @@ for line in code:
 lines = {}
 for lineNum in range(0, len(code)-1):
     line = code[lineNum]
-    if line!="" and line in code[lineNum + 1:-1]:
+    if line!="" and line in code[lineNum + 1:-1] and len(line)>6:
         if not line in lines.keys():
             lines[line] = 2
         else:
             lines[line] += 1
 
-for key in lines.keys():
-    print str(lines[key]) + " " + key
+keys = lines.keys()
+orderedCount = []
+orderedLines = []
+
+for line in sorted(lines, key=lines.get):
+    print str(lines[line]) + " " + line
