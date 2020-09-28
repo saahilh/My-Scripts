@@ -32,7 +32,7 @@ def get_num_different_lines(path_to_first_file, path_to_second_file):
     first_file_lines = first_file.readlines()
     second_file_lines = second_file.readlines()
 
-    for i in xrange(min(len(first_file_lines), len(second_file_lines)):
+    for i in xrange(min(len(first_file_lines), len(second_file_lines))):
         if (first_file_lines[i] != second_file_lines[i]) :
             num_different_lines += 1
 
