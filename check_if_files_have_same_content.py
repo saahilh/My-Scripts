@@ -32,14 +32,14 @@ def get_num_different_lines(path_to_first_file, path_to_second_file):
     first_file_lines = first_file.readlines()
     second_file_lines = second_file.readlines()
 
-    for i in xrange(len(first_file_lines)):
+    for i in xrange(min(len(first_file_lines), len(second_file_lines)):
         if (first_file_lines[i] != second_file_lines[i]) :
             num_different_lines += 1
 
     first_file.close()
     second_file.close()
 
-    return num_different_lines
+    return num_different_lines + abs(len(first_file_lines) - len(second_file_lines))
 
 def check_if_files_have_same_content_and_print(arguments):
     # If called using console argument
