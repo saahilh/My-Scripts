@@ -23,23 +23,30 @@ from my_lib import remove_newlines
     Note that in the file method, I have assumed that filenames are the same in both directories.
 '''
 
-def files_have_same_content(path_to_first_file, path_to_second_file):
+def get_num_different_lines(path_to_first_file, path_to_second_file):
     first_file = open(path_to_first_file, 'r')
     second_file = open(path_to_second_file, 'r')
     
-    files_are_identical = first_file.readlines()==second_file.readlines()
+    num_different_lines = 0
+
+    first_file_lines = first_file.readlines()
+    second_file_lines = second_file.readlines()
+
+    for i in xrange(min(len(first_file_lines), len(second_file_lines)):
+        if (first_file_lines[i] != second_file_lines[i]) :
+            num_different_lines += 1
 
     first_file.close()
     second_file.close()
 
-    return files_are_identical
+    return num_different_lines + abs(len(first_file_lines) - len(second_file_lines))
 
 def check_if_files_have_same_content_and_print(arguments):
     # If called using console argument
     if(len(arguments)>1):
         path_to_first_file = sys.argv[1]
         path_to_second_file = sys.argv[2]
-        print str(files_have_same_content(path_to_first_file, path_to_second_file))
+        print 'Number of different lines: ' + str(get_num_different_lines(path_to_first_file, path_to_second_file))
 
     # If called using a file
     else:
@@ -55,8 +62,9 @@ def check_if_files_have_same_content_and_print(arguments):
             path_to_first_file = path_to_first_directory + file_name
             path_to_second_file = path_to_second_directory + file_name
 
-            if not files_have_same_content(path_to_first_file, path_to_second_file):
-                failed_tests.append(file_name)
+            num_different_lines = get_num_different_lines(path_to_first_file, path_to_second_file)
+            if (num_different_lines != 0):
+                failed_tests.append(file_name + ' ' + str(num_different_lines))
 
         if not failed_tests:
             print "All checks passed"
